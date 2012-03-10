@@ -1,9 +1,9 @@
 
 # StoreConfigurable
 
-<img src="http://cdn.actionmoniker.com/share/recursive_kitty_small.jpg" alt="Recursive Github Kitty" width="260" height="160" style="float:right; margin:-20px 35px 15px 15px; background-color:#fff; padding:13px; -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.5); -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.5); box-shadow: 5px 5px 5px rgba(0,0,0,0.5); -moz-transform: rotate(-2deg); -webkit-transform: rotate(-2deg); transform: rotate(-2deg);">
-
 A zero-configuration recursive Hash for storing a tree of options in a serialized ActiveRecord column. Includes self aware hooks that delegate dirty/changed state to your configs owner.
+
+<img src="http://cdn.actionmoniker.com/share/recursive_kitty_small.jpg" alt="Recursive Github Kitty" width="260" height="160" style="float:right; margin:-20px 35px 15px 15px; background-color:#fff; padding:13px; -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.5); -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.5); box-shadow: 5px 5px 5px rgba(0,0,0,0.5); -moz-transform: rotate(-2deg); -webkit-transform: rotate(-2deg); transform: rotate(-2deg);">
 
 [![Build Status](https://secure.travis-ci.org/metaskills/store_configurable.png)](http://travis-ci.org/metaskills/store_configurable)
 
@@ -42,7 +42,7 @@ end
 
 ## Usage
 
-The `config` method is your gateway to StoreConfigurable and unlike ActiveRecord's new Store object in 3.2, there is no configuration needed to start using it for any property. It will dynamically expand for every property or namespace. This allows you or other plugins' configurations to be grouped in logical nodes. All examples below assume that StoreConfigurable is being used on a User instance as shown in the setup above.
+Our `config` method is your gateway to StoreConfigurable and unlike ActiveRecord's new Store object in 3.2, there is no configuration needed to start using it for any property. It will dynamically expand for every property or namespace. This allows you or other plugins' configurations to be grouped in logical nodes. All examples below assume that StoreConfigurable is being used on a User instance as shown in the setup above.
 
 ```ruby
 @user.config.remember_me = true
@@ -60,8 +60,8 @@ StoreConfigurable is smart enought to let your parent object know when it change
 @user = User.find(42)
 @user.config_changed? # => false
 
-@user.config.remember_me = true # Same value
-@user.config_changed? # => false
+@user.config.remember_me = true   # Same value
+@user.config_changed?             # => false
 
 @user.config.sortable_tables.column    = 'updated_at'
 @user.config.sortable_tables.direction = 'desc'
@@ -70,12 +70,12 @@ StoreConfigurable is smart enought to let your parent object know when it change
 
 #### Hash Syntax
 
-The StoreConfigurable data objects supports most `Hash` methods with the exception of a few that rely on making a copy of the data, like `dup`. This means you can delete whole branches of data or itterate over your data collection. Again, our data option objects report all changes to the owner object via ActiveRecord's dirty support.
+The StoreConfigurable data objects supports most `Hash` methods with the exception of a few that rely on making a copy of the data, like `dup`. This means you can delete whole branches of data or itterate over your data collection. Again, StoreConfigurable reports all changes to the owner object via ActiveRecord's dirty support.
 
 ```ruby
 @user.config.sortable_tables.delete   # Deletes this node/namespace.
 @user.config.clear                    # Hash method to purge.
-@user.config_changed?                 # true
+@user.config_changed?                 # => true
 ```
 
 #### Choose Your Style
@@ -85,7 +85,7 @@ You can choose to get or set config values via any method or hash key syntax you
 ```ruby
 @user.config.color = '#c1c1c1'
 @user.config['remember_me'] = true
-@user.config[:sortable_tables'].direction = 'asc'
+@user.config[:sortable_tables].direction = 'asc'
 @user.config.sortable_tables['column'] = 'updated_at'
 
 @user.config['color']                       # => '#c1c1c1'
