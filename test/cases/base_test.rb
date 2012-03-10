@@ -41,7 +41,7 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
     user_ken.config.sortable_tables[:direction].must_equal 'asc'
     user_ken.config[:sortable_tables][:column].must_equal 'updated_at'
   end
-    
+  
   it 'must be mark owner as dirty after missing getter since that inits a new namespace' do
     user_ken.config.bar
     user_ken.must_be :config_changed?
