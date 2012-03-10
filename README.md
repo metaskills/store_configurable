@@ -1,5 +1,5 @@
 
 # StoreConfigurable
 
-A zero-configuration recursive hash for storing anything in a serialized ActiveRecord column.
+A zero-configuration recursive Hash for storing a tree of options in a serialized ActiveRecord column.
 

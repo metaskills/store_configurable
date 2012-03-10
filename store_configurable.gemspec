@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors       = ['Ken Collins']
   s.email         = ['ken@metaskills.net']
   s.homepage      = 'http://github.com/Decisiv/store_configurable/'
-  s.summary       = 'A small engine around ActiveRecord::Store.'
-  s.description   = 'Includes a #config method and syntatic sugar hooks for our classes.'
+  s.summary       = 'A zero-configuration recursive Hash for storing a tree of options in a serialized ActiveRecord column.'
+  s.description   = 'Grown up ActiveRecord::Store config options!'
   s.files         = `git ls-files`.split("\n") - ["store_configurable.gemspec"]
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
