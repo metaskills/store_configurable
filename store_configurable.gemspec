@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.authors       = ['Ken Collins']
   s.email         = ['ken@metaskills.net']
-  s.homepage      = 'http://github.com/Decisiv/store_configurable/'
+  s.homepage      = 'http://github.com/metaskills/store_configurable/'
   s.summary       = 'A zero-configuration recursive Hash for storing a tree of options in a serialized ActiveRecord column.'
   s.description   = 'Grown up ActiveRecord::Store config options!'
   s.files         = `git ls-files`.split("\n") - ["store_configurable.gemspec"]
