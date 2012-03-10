@@ -27,6 +27,20 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
     user_ken.config
     user_ken.wont_be :config_changed?
   end
+  
+  it 'can use uncool hash syntax if you want with varying techniques of strings, symbols and calls' do
+    user_ken.config.color = 'black'
+    user_ken.config['remember_me'] = true
+    user_ken.config['sortable_tables'].direction = 'asc'
+    user_ken.config.sortable_tables['column'] = 'updated_at'
+    user_ken.save!
+    user_ken.reload
+    user_ken.config['color'].must_equal 'black'
+    user_ken.config[:color].must_equal 'black'
+    user_ken.config.remember_me.must_equal true
+    user_ken.config.sortable_tables[:direction].must_equal 'asc'
+    user_ken.config[:sortable_tables][:column].must_equal 'updated_at'
+  end
     
   it 'must be mark owner as dirty after missing getter since that inits a new namespace' do
     user_ken.config.bar
