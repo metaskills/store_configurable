@@ -48,7 +48,7 @@ Our `config` method is your gateway to StoreConfigurable and unlike ActiveRecord
 @user.config.remember_me = true
 @user.config.sortable_tables.column    = 'created_at'
 @user.config.sortable_tables.direction = 'asc'
-@user.config.you.should.never.need.to.do.this = 'deep_value'
+@user.config.you.should.never.need.to.do.this.but.you.could.if.you.wanted.to = 'deep_value'
 @user.save
 ```
 
