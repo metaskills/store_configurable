@@ -11,11 +11,11 @@ module StoreConfigurable
     # that we use. 
     # 
     # The +dump+ method serializes the raw data behind the +StoreConfigurable::Object+ proxy 
-    # object. This means that we only storing pure ruby primitives in the datbase, not our 
-    # object's proxy.
+    # object. This means that we only store pure ruby primitives in the datbase, not our 
+    # proxy object's YAML type.
     # 
     # The +load+ method mimics +ActiveRecord::Coders::YAMLColumn+ internals by retuning a 
-    # new object when needed as well as making sure that the yaml we are process if of the 
+    # new object when needed as well as making sure that the YAML we are process if of the 
     # same type. When reconstituting  a +StoreConfigurable::Object+ we must set the store's 
     # owner as this does. That way as our recursive  lambda loader regenerates the tree of 
     # config data, we always have a handle for each +DirtyTrackingOrderedOptions+ object to 

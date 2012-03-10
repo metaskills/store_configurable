@@ -40,6 +40,11 @@ module StoreConfigurable
     def dup
       raise NotImplementedError, 'the StoreConfigurable::Object does not support making a copy'
     end
+    alias_method :reject, :dup
+    
+    def merge(other)
+      dup
+    end
       
     def reject!
       _with_config_keys_may_change! { super }
