@@ -1,0 +1,7 @@
+require 'active_record'
+require 'store_configurable/version'
+require 'store_configurable/dirty_options'
+require 'store_configurable/object'
+require 'store_configurable/serialization'
+require 'store_configurable/read'
+require 'store_configurable/base'
