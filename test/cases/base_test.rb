@@ -140,6 +140,12 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
       @user.config.must_be :blank?
     end
     
+    it 'can pass off nodes and still work properly' do
+      need = @user.config.you.should.never.need
+      need.moar = 'winning'
+      @user.must_be :config_changed?
+    end
+    
   end
 
   
