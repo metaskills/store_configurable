@@ -1,4 +1,14 @@
 
+= 3.2.2
+
+* Fix new object inspect by hooking into #read_attribute. Fixes #2.
+
+
+= 3.2.1
+
+* Fix rubygems homepage link.
+
+
 = 3.2.0
 
 * Initial release. Works with ActiveRecord 3.2.x

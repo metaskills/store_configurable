@@ -6,6 +6,10 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
     new_user.config.wont_be_nil
   end
   
+  it 'can inspect a new user' do
+    new_user.inspect
+  end
+  
   it 'can set and get root attributes' do
     new_user.config.foo = 'foo'
     new_user.config.foo.must_equal 'foo'
