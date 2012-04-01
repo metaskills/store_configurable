@@ -1,4 +1,11 @@
 
+= 3.2.3
+
+* Allow inspect of the StoreConfigurable object to pass down to ordered options.
+
+* Avoid inspection errors by setting config for all #read_attribute calls.
+
+
 = 3.2.2
 
 * Fix new object inspect by hooking into #read_attribute. Fixes #2.

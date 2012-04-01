@@ -58,10 +58,6 @@ module StoreConfigurable
         @__config__ ||= DirtyTrackingOrderedOptions.new(@__store_configurable_owner__)
       end
       
-      def inspect
-        "#<StoreConfigurable::Object:#{object_id}>"
-      end
-      
       private
 
       def method_missing(method, *args, &block)

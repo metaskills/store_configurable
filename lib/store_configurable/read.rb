@@ -52,7 +52,7 @@ module StoreConfigurable
     
     # An override to ActiveRecord's low level read_attribute so we can setup the config object.
     def read_attribute(attr_name)
-      config if attr_name.to_s == '_config'
+      config
       super
     end
     
