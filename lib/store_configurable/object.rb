@@ -38,8 +38,8 @@ module StoreConfigurable
         config = StoreConfigurable::Object.new
         config.__store_configurable_owner__ = owner
         loader = lambda do |options, key, value|
-          value.is_a?(Hash) ? value.each { |k,v| loader.call(options.send(key), k, v) } : 
-            options.send("#{key}=", value)
+          value.is_a?(Hash) ? value.each { |k,v| loader.call(options.send(:[],key), k, v) } : 
+            options.send(:[]=, key, value)
         end
         stored_data.each { |k,v| loader.call(config, k, v) }
         owner.changed_attributes.delete('_config')

@@ -1,4 +1,9 @@
 
+= 3.2.4
+
+* The loader will just not send to key names but always use :[] and :[]= for safety.
+
+
 = 3.2.3
 
 * Allow inspect of the StoreConfigurable object to pass down to ordered options.

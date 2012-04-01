@@ -57,6 +57,12 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
     lambda{ user_ken.config.merge({}) }.must_raise(NotImplementedError) 
   end
 
+  it 'can save unsafe keys' do
+    user_ken.config.sortable_tables[:posts][:sort].on = 'title'
+    user_ken.config.sortable_tables[:posts][:sort].dir = 'asc'
+    user_ken.save!
+  end
+  
   describe 'existing data' do
     
     let(:color)       { '#c1c1c1' }
@@ -148,6 +154,12 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
       need = @user.config.you.should.never.need
       need.moar = 'winning'
       @user.must_be :config_changed?
+    end
+    
+    it 'can resave unsafe keys' do
+      @user.config.sortable_tables[:comments][:sort].on = 'title'
+      @user.config.sortable_tables[:comments][:sort].dir = 'asc'
+      @user.save!
     end
     
   end
