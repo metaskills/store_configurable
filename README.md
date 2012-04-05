@@ -1,7 +1,7 @@
 
 # StoreConfigurable
 
-A zero-configuration recursive Hash for storing a tree of options in a serialized ActiveRecord column. Includes self aware hooks that delegate dirty/changed state to your configs owner.
+A zero-configuration recursive Hash for storing a tree of options in a serialized ActiveRecord column. Includes self aware hooks that delegate dirty/changed state to your configs owner. Read my article [*A Lesson In Recursion In Ruby*](http://metaskills.net/2012/03/12/store-configurable-a-lesson-in-recursion-in-ruby/) if you are interested in how this library works.
 
 <img src="http://cdn.actionmoniker.com/share/recursive_kitty_small.jpg" alt="Recursive Github Kitty" width="260" height="160" style="float:right; margin:-20px 35px 15px 15px; background-color:#fff; padding:13px; -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.5); -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.5); box-shadow: 5px 5px 5px rgba(0,0,0,0.5); -moz-transform: rotate(-2deg); -webkit-transform: rotate(-2deg); transform: rotate(-2deg);">
 
