@@ -115,6 +115,10 @@ StoreConfigurable persists your configuration data in YAML format to the `_confi
             - :this: deep_value
 ```
 
+## Todo
+
+* Incorporate an option to compress serialized data. Gzip, [MessagePack](http://msgpack.org/), Etc...
+
 
 ## License
 
