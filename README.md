@@ -18,7 +18,7 @@ gem 'store_configurable', '~> 3.2.0'
 
 ## Setup
 
-To use StoreConfigurable, you must create create a `_config` colun in the model's table. Make sure that you declare this column as a text type, so there's plenty of room.
+To use StoreConfigurable, you must create a `_config` column in the model's table. Make sure that you declare this column as a text type, so there's plenty of room.
 
 ```ruby
 class AddStoreConfigurableField < ActiveRecord::Migration
