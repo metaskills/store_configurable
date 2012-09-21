@@ -122,7 +122,7 @@ StoreConfigurable persists your configuration data in YAML format to the `_confi
 
 ## Other Solutions
 
-* [StoreField](https://github.com/kenn/store_field) - Similiar approach but no dirty tracking and still requires manual key configs.
+* [StoreField](https://github.com/kenn/store_field) - Similar approach but no dirty tracking and still requires manual key configs.
 
 
 ## License
