@@ -120,6 +120,11 @@ StoreConfigurable persists your configuration data in YAML format to the `_confi
 * Incorporate an option to compress serialized data. Gzip, [MessagePack](http://msgpack.org/), Etc...
 
 
+## Other Solutions
+
+* [StoreField](https://github.com/kenn/store_field) - Similiar approach but no dirty tracking and still requires manual key configs.
+
+
 ## License
 
 * Released under the MIT license thanks to Decisiv, Inc.
