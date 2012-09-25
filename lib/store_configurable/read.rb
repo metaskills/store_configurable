@@ -56,8 +56,8 @@ module StoreConfigurable
       super
     end
 
-    # We never want the `_config` key in the list of attributes. This keeps practically keeps
-    # ActiveRecord from always saving this serialized column too
+    # We never want the `_config` key in the list of attributes. This keeps ActiveRecord
+    # from always saving this serialized column too.
     def attributes
       super.tap { |x| x.delete('_config') }
     end
