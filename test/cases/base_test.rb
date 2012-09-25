@@ -46,7 +46,7 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
     user_ken.config[:sortable_tables][:column].must_equal 'updated_at'
   end
   
-  it 'must be mark owner as dirty after missing getter since that inits a new namespace' do
+  it 'must mark owner as dirty after missing getter since that inits a new namespace' do
     user_ken.config.bar
     user_ken.must_be :config_changed?
   end
@@ -78,9 +78,22 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
       user_ken.save!
       @user = User.find(user_ken.id)
     end
-    
+
     it 'wont be dirty after loading' do
       @user.wont_be :config_changed?
+      @user.wont_be :changed?
+    end
+
+    it 'does not update the _config column when not dirty, bypassing ActiveRecords always save serialized columns' do
+      assert_queries(0) { @user.save! }
+    end
+
+    it 'allows the dirty _config value to be persisted' do
+      new_color = '#f1f1f1'
+      @user.config.color = new_color
+      @user.must_be :changed?
+      assert_queries(1) { @user.save! }
+      User.find(@user.id).config.color.must_equal new_color
     end
     
     it 'can reconsitute saved values' do

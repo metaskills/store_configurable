@@ -1,6 +1,6 @@
 module StoreConfigurable
   module Read
-    
+
     # Our main syntatic interface to the underlying +_config+ store. This method ensures that 
     # +self+, the store's owner, will allways be set in the config object. Hence allowing all 
     # other recursive options to get a handle back to the owner.
@@ -54,6 +54,12 @@ module StoreConfigurable
     def read_attribute(attr_name)
       config
       super
+    end
+
+    # We never want the `_config` key in the list of attributes. This keeps practically keeps
+    # ActiveRecord from always saving this serialized column too
+    def attributes
+      super.tap { |x| x.delete('_config') }
     end
     
   end

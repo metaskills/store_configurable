@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'bundler'
-require "bundler/setup"
+require 'bundler/setup'
 Bundler.require
 require 'store_configurable'
 require 'active_record/base'
+require 'support/activerecord'
 require 'minitest/autorun'
 require 'logger'
 
@@ -14,6 +15,8 @@ ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => ':me
 
 module StoreConfigurable
   class TestCase < MiniTest::Spec
+
+    include ActiveRecordTestHelper
     
     before { setup_environment }
     
