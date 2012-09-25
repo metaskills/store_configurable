@@ -19,6 +19,7 @@ module StoreConfigurable
     
     let(:new_user) { User.new }
     let(:user_ken) { User.find_by_email('ken@metaskills.net') }
+    let(:post_sc)  { Post.find_by_title('StoreConfigurable') }
     
     def setup_environment
       setup_database
@@ -34,12 +35,16 @@ module StoreConfigurable
             t.string  :name, :email
             t.text    :_config
           end
+          connection.create_table :posts, :force => true do |t|
+            t.string  :title, :body
+          end
         end
       end
     end
     
     def setup_data
       User.create :name => 'Ken Collins', :email => 'ken@metaskills.net'
+      Post.create :title => 'StoreConfigurable', :body => 'test'
     end
     
   end
@@ -53,4 +58,7 @@ end
 
 class User < ActiveRecord::Base
   store_configurable
+end
+
+class Post < ActiveRecord::Base  
 end
