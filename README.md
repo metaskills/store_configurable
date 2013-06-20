@@ -1,4 +1,3 @@
-
 # StoreConfigurable
 
 A zero-configuration recursive Hash for storing a tree of options in a serialized ActiveRecord column. Includes self aware hooks that delegate dirty/changed state to your configs owner. Read my article [*A Lesson In Recursion In Ruby*](http://metaskills.net/2012/03/12/store-configurable-a-lesson-in-recursion-in-ruby/) if you are interested in how this library works.
@@ -128,5 +127,5 @@ StoreConfigurable persists your configuration data in YAML format to the `_confi
 ## License
 
 * Released under the MIT license thanks to Decisiv, Inc.
-* Copyright (c) 2011 Ken Collins
+* Copyright (c) 2013 Ken Collins
 
