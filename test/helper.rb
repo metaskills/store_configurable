@@ -1,17 +1,11 @@
-require 'rubygems'
-require 'bundler'
-require 'bundler/setup'
-Bundler.require
+require 'bundler' ; Bundler.require :development, :test
 require 'store_configurable'
-require 'active_record/base'
 require 'support/activerecord'
 require 'minitest/autorun'
 require 'logger'
 
-
-ActiveRecord::Base.logger = Logger.new(File.join(File.dirname(__FILE__),'debug.log'))
+ActiveRecord::Base.logger = Logger.new('/dev/null')
 ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => ':memory:'
-
 
 module StoreConfigurable
   class TestCase < MiniTest::Spec
@@ -21,8 +15,7 @@ module StoreConfigurable
     before { setup_environment }
     
     let(:new_user) { User.new }
-    let(:user_ken) { User.find_by_email('ken@metaskills.net') }
-    let(:post_sc)  { Post.find_by_title('StoreConfigurable') }
+    let(:user_ken) { User.where(:email => 'ken@metaskills.net').first }
     
     def setup_environment
       setup_database
@@ -33,14 +26,12 @@ module StoreConfigurable
 
     def setup_database
       ActiveRecord::Base.class_eval do
-        silence do
-          connection.create_table :users, :force => true do |t|
-            t.string  :name, :email
-            t.text    :_config
-          end
-          connection.create_table :posts, :force => true do |t|
-            t.string  :title, :body
-          end
+        connection.create_table :users, :force => true do |t|
+          t.string  :name, :email
+          t.text    :_config
+        end
+        connection.create_table :posts, :force => true do |t|
+          t.string  :title, :body
         end
       end
     end
