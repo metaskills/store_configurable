@@ -11,17 +11,17 @@ module StoreConfigurable
   class TestCase < MiniTest::Spec
 
     include ActiveRecordTestHelper
-    
+
     before { setup_environment }
-    
+
     let(:new_user) { User.new }
     let(:user_ken) { User.where(:email => 'ken@metaskills.net').first }
-    
+
     def setup_environment
       setup_database
       setup_data
     end
-    
+
     protected
 
     def setup_database
@@ -35,12 +35,12 @@ module StoreConfigurable
         end
       end
     end
-    
+
     def setup_data
       User.create :name => 'Ken Collins', :email => 'ken@metaskills.net'
       Post.create :title => 'StoreConfigurable', :body => 'test'
     end
-    
+
   end
 end
 
@@ -54,5 +54,5 @@ class User < ActiveRecord::Base
   store_configurable
 end
 
-class Post < ActiveRecord::Base  
+class Post < ActiveRecord::Base
 end

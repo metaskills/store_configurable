@@ -4,7 +4,7 @@ module StoreConfigurable
     protected
 
     class SQLCounter
-      
+
       class << self
         attr_accessor :ignored_sql, :log
       end
@@ -23,7 +23,7 @@ module StoreConfigurable
         return if 'CACHE' == values[:name] || ignore =~ sql
         self.class.log << sql
       end
-      
+
     end
 
     def assert_sql(*patterns_to_match)
