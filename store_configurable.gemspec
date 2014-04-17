@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
   s.rdoc_options  = ['--charset=UTF-8']
-  s.add_runtime_dependency     'activerecord', '>= 3.2'
+  s.add_runtime_dependency     'activerecord', '~> 3.2.0'
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'minitest', '~> 5.0'
+  s.add_development_dependency 'minitest'
 end

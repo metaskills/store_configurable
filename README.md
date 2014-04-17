@@ -126,18 +126,18 @@ StoreConfigurable persists your configuration data in YAML format to the `_confi
 
 ## Contributing
 
-StoreConfigurable is fully tested with ActiveRecord 3.2 to 4.0 and upward. If you detect a problem, open up a github issue or fork the repo and help out. After you fork or clone the repository, the following commands will get you up and running on the test suite. 
+StoreConfigurable is fully tested with ActiveRecord 3.2 to 4.0 and upward. If you detect a problem, open up a github issue or fork the repo and help out. After you fork or clone the repository, the following commands will get you up and running on the test suite.
 
 ```shell
 $ bundle install
-$ bundle exec rake appraisal:setup
-$ bundle exec rake appraisal test
+$ bundle exec appraisal
+$ bundle exec appraisal rake test
 ```
 
 We use the [appraisal](https://github.com/thoughtbot/appraisal) gem from Thoughtbot to help us generate the individual gemfiles for each ActiveSupport version and to run the tests locally against each generated Gemfile. The `rake appraisal test` command actually runs our test suite against all ActiveRecord versions in our `Appraisal` file. If you want to run the tests for a specific ActiveRecord version, use `rake -T` for a list. For example, the following command will run the tests for Rails 3.2 only.
 
 ```shell
-$ bundle exec rake appraisal:activerecord32 test
+$ bundle exec appraisal activerecord32 rake test
 ```
 
 

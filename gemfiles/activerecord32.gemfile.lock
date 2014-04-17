@@ -1,11 +1,11 @@
 PATH
-  remote: /Users/kencollins/Repositories/store_configurable
+  remote: ..
   specs:
-    store_configurable (3.2.2)
-      activerecord (>= 3.2)
+    store_configurable (3.2.5)
+      activerecord (~> 3.2.0)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     activemodel (3.2.13)
       activesupport (= 3.2.13)
@@ -36,7 +36,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 3.2.0)
   appraisal
-  minitest (~> 5.0)
+  minitest
   rake
   sqlite3
   store_configurable!
