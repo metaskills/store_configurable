@@ -1,10 +1,14 @@
-require 'active_support/basic_object'
+begin
+  require 'active_support/basic_object'
+rescue LoadError
+  require 'active_support/proxy_object'
+end
 
 module StoreConfigurable
 
   # The is the object returned by the +config+ method. It does nothing more than delegate
   # all calls to a tree of +DirtyTrackingOrderedOptions+ objects which are basically hashes.
-  class Object < ::ActiveSupport::BasicObject
+  class Object < ::ActiveSupport::ProxyObject
 
     # Class methods so the +StoreConfigurable::Object+ responds to +dump+ and +load+ which
     # allows it to conform to ActiveRecord's coder requirement via its serialize method
