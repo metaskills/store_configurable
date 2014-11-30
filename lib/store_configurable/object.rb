@@ -1,8 +1,4 @@
-begin
-  require 'active_support/basic_object'
-rescue LoadError
-  require 'active_support/proxy_object'
-end
+require 'active_support/proxy_object'
 
 module StoreConfigurable
 
