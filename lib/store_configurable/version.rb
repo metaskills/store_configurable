@@ -1,6 +1,6 @@
 module StoreConfigurable
 
   # We track ActiveRecord's major and minor version and follow semantic versioning.
-  VERSION = '3.2.5'
+  VERSION = '4.0.0.beta'
 
 end
