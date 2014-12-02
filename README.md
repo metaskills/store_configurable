@@ -14,6 +14,8 @@ Install the gem with bundler. We follow a semantic versioning format that tracks
 gem 'store_configurable', '~> 4.0.0'
 ```
 
+Our `4.0.x` version works for ActiveRecord 4.0.x or 4.1.x.
+
 
 ## Setup
 
