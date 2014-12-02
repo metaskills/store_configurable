@@ -11,6 +11,7 @@ module StoreConfigurable
   # DirtyTrackingOrderedOptions also make sure that every sub instance of it self also has a handle
   # back to your store's owner. In this way when config attributes are added or values change,
   # we can mark your ActiveRecord object as dirty/changed.
+  #
   class DirtyTrackingOrderedOptions < ::ActiveSupport::OrderedOptions
 
     Recursive = lambda { |h,k| h[k] = h.class.new(h.__store_configurable_owner__) }
@@ -71,6 +72,7 @@ module StoreConfigurable
     end
 
     def _config_will_change!
+      return unless __store_configurable_owner__
       __store_configurable_owner__._config_will_change!
     end
 

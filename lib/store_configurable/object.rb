@@ -4,7 +4,19 @@ module StoreConfigurable
 
   # The is the object returned by the +config+ method. It does nothing more than delegate
   # all calls to a tree of +DirtyTrackingOrderedOptions+ objects which are basically hashes.
+  #
   class Object < ::ActiveSupport::ProxyObject
+
+    OMAP_CONVERTER = lambda do |config|
+      ::ActiveSupport::OrderedHash[config.to_a].tap do |omap|
+        omap.each { |k,v| omap[k] = OMAP_CONVERTER.call(v) if v.is_a?(::Hash) }
+      end
+    end
+
+    YAML_LOADER = lambda do |options, key, value|
+      value.is_a?(::Hash) ? value.each { |k,v| YAML_LOADER.call(options.send(:[],key), k, v) } :
+        options.send(:[]=, key, value)
+    end
 
     # Class methods so the +StoreConfigurable::Object+ responds to +dump+ and +load+ which
     # allows it to conform to ActiveRecord's coder requirement via its serialize method
@@ -21,13 +33,15 @@ module StoreConfigurable
     # config data, we always have a handle for each +DirtyTrackingOrderedOptions+ object to
     # report state changes back to the owner. Finally, after each load we make sure to clear
     # out changes so reloaded objects are not marked as dirty.
+    #
     module Coding
 
       def dump(value)
-        YAML.dump value.__config__
+        config = (value.nil? ? StoreConfigurable::Object.new : value).__config__
+        YAML.dump OMAP_CONVERTER.call(config)
       end
 
-      def load(yaml, owner)
+      def load(yaml, owner=nil)
         return StoreConfigurable::Object.new if yaml.blank?
         return yaml unless yaml.is_a?(String) && yaml =~ /^---/
         stored_data = YAML.load(yaml)
@@ -37,12 +51,8 @@ module StoreConfigurable
         end
         config = StoreConfigurable::Object.new
         config.__store_configurable_owner__ = owner
-        loader = lambda do |options, key, value|
-          value.is_a?(Hash) ? value.each { |k,v| loader.call(options.send(:[],key), k, v) } :
-            options.send(:[]=, key, value)
-        end
-        stored_data.each { |k,v| loader.call(config, k, v) }
-        owner.changed_attributes.delete('_config')
+        stored_data.each { |k,v| YAML_LOADER.call(config, k, v) }
+        owner.changed_attributes.delete('_config') if owner
         config
       end
 
@@ -50,6 +60,7 @@ module StoreConfigurable
 
     # Instance methods for +StoreConfigurable::Object+ defined and included in a module so
     # that if you ever wanted to, you could redefine these methods and +super+ up.
+    #
     module Behavior
 
       attr_accessor :__store_configurable_owner__

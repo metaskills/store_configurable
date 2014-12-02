@@ -25,9 +25,10 @@ module StoreConfigurable
       #   class User < ActiveRecord::Base
       #     store_configurable
       #   end
+      #
       def store_configurable
         serialize '_config', StoreConfigurable::Object
-        include Read
+        include StoreConfigurable::Behavior
       end
 
     end

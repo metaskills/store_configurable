@@ -23,8 +23,10 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
 
   it 'can serialize to yaml' do
     user_ken.config.foo = 'bar'
-    user_ken.config.to_yaml.must_include '--- !omap'
-    user_ken.config.to_yaml.must_include ':foo: bar'
+    user_ken.save!
+    raw_config = User.connection.select_value "SELECT _config FROM users WHERE id = #{user_ken.id}"
+    raw_config.must_include '--- !omap'
+    raw_config.must_include ':foo: bar'
   end
 
   it 'wont mark owner as dirty after initial read from database with no existing config' do
@@ -177,6 +179,39 @@ class StoreConfigurable::BaseTest < StoreConfigurable::TestCase
 
   end
 
+  describe 'legacy data' do
+
+    let(:omap_yaml) { omap_yaml_string.strip }
+
+    it 'can use omap yaml' do
+      conn = User.connection
+      conn.execute "UPDATE users SET _config=#{conn.quote(omap_yaml)} WHERE id=#{user_ken.id}"
+      user = User.find(user_ken.id)
+      user.config.sortable_tables.column.must_equal 'created_at'
+    end
+
+  end
+
+
+
+  private
+
+  def omap_yaml_string
+    <<YAML
+--- !omap
+- :remember_me: true
+- :sortable_tables: !omap
+  - :column: created_at
+  - :direction: asc
+- :you: !omap
+  - :should: !omap
+    - :never: !omap
+      - :need: !omap
+        - :to: !omap
+          - :do: !omap
+            - :this: deep_value
+YAML
+  end
 
 end
 

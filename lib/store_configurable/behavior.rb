@@ -1,5 +1,5 @@
 module StoreConfigurable
-  module Read
+  module Behavior
 
     # Our main syntatic interface to the underlying +_config+ store. This method ensures that
     # +self+, the store's owner, will allways be set in the config object. Hence allowing all
@@ -22,17 +22,20 @@ module StoreConfigurable
     #   user.config.sortable_tables.products.direction = 'asc'
     #   user.changed?        # => true
     #   user.config_changed? # => true
+    #
     def config
       _config.__store_configurable_owner__ = self
       _config
     end
 
     # Simple delegation to the underlying data attribute's changed query method.
+    #
     def config_changed?
       _config_changed?
     end
 
     # Simple delegation to the underlying data attribute's change array.
+    #
     def config_change
       _config_change
     end
@@ -41,6 +44,7 @@ module StoreConfigurable
     # behavior so that we can set the context of this owner and ensure we pass that down to
     # the YAML coder. Doing this on a per instance basis keeps us from trumping all other
     # +ActiveRecord::AttributeMethods::Serialization::Attribute+ objects.
+    #
     def _config
       attrib = @attributes['_config']
       unless attrib.respond_to?(:__store_configurable_owner__)
@@ -50,14 +54,9 @@ module StoreConfigurable
       super
     end
 
-    # An override to ActiveRecord's low level read_attribute so we can setup the config object.
-    def read_attribute(attr_name)
-      config
-      super
-    end
-
     # We never want the `_config` key in the list of attributes. This keeps ActiveRecord
     # from always saving this serialized column too.
+    #
     def attributes
       super.tap { |x| x.delete('_config') }
     end
